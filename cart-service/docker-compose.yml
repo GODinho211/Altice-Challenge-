@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: cart-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cart
+    ports:
+      - "5433:5432"
