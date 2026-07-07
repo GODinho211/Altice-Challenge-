@@ -13,6 +13,7 @@ import org.alticelabs.client.ProductClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -36,6 +37,7 @@ public class CartItemService {
 
         //CALL PRODUCT SERVICE
         ProductDto product = productClient.getProductById(item.getProductId());
+        System.out.println(product);
 
         if (product == null) {
             throw new NotFoundException("Product not found");
@@ -57,7 +59,9 @@ public class CartItemService {
         }
 
         item.setCart(cart);
+        item.setPrice(new BigDecimal("99.99"));
         cart.getItems().add(item);
+
 
         return cart;
     }

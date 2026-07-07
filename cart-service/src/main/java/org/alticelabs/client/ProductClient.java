@@ -16,4 +16,5 @@ public interface ProductClient {
     @GET
     @Path("/{id}")
     ProductDto getProductById(@PathParam("id") UUID id);
+
 }

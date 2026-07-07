@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.alticelabs.cart.control.CartService;
+import org.alticelabs.cart.control.CheckoutService;
 import org.alticelabs.cart.entity.Cart;
 import org.alticelabs.cartItem.control.CartItemService;
 import org.alticelabs.cartItem.entity.CartItem;
@@ -22,6 +23,9 @@ public class CartResource {
 
     @Inject
     CartItemService itemService;
+
+    @Inject
+    CheckoutService checkoutService;
 
     @GET
     public List<Cart> findAll() {
@@ -110,6 +114,15 @@ public class CartResource {
         Cart updated = itemService.removeItem(cartId, productId);
 
         return Response.ok(updated).build();
+    }
+
+    @POST
+    @Path("/{cartId}/checkout")
+    public Response checkout(@PathParam("cartId") UUID cartId) {
+
+        CheckoutResponse response = checkoutService.checkout(cartId);
+
+        return Response.ok(response).build();
     }
 
 }
